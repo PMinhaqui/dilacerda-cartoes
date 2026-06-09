@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Di Lacerda | Solução que gera resultado</title>
+    
+    <!-- Fontes Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+
+        .logo-di {
+    color: var(--black);
+}
+
+.logo-lacerda {
+    color: var(--red-primary);
+}
+        :root {
+            --red-primary: #C8102E; /* Vermelho Corporativo Premium */
+            --red-gradient: linear-gradient(135deg, #ffffff 0%, #f39999 100%);
+            --graphite: #2A2A2A;
+            --black: #111111;
+            --white: #ffffff;
+            --gray-light: #F4F5F7;
+            --gray-text: #6B7280;
+            --green-wpp: #25D366;
+            --font-logo: 'Montserrat', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: #E5E7EB; /* Fundo neutro para desktop */
+            font-family: var(--font-body);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Container Principal do Cartão Virtual (Simula a tela do celular) */
+        .card-container {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--gray-light);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding-bottom: 40px;
+        }
+
+        /* Curva Fluida Vermelha no Topo */
+        .top-curve {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 320px;
+            background: var(--red-gradient);
+            border-bottom-left-radius: 40% 15%;
+            border-bottom-right-radius: 40% 15%;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(200, 16, 46, 0.3);
+        }
+
+        /* Área de Conteúdo (Sobrepõe a curva) */
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 40px 25px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header / Logo */
+        .logo-area {
+            text-align: center;
+            margin-bottom: 25px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .logo-area h1 {
+            font-family: var(--font-logo);
+            color: var(--white);
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .slogan {
+            color: rgb(185, 36, 36);
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-top: 5px;
+        }
+
+        /* Perfil Executivo */
+        .profile-card {
+            background: var(--white);
+            width: 100%;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            text-align: center;
+            margin-bottom: 30px;
+            animation: slideUp 0.8s ease;
+        }
+
+        .profile-name {
+            font-family: var(--font-logo);
+            color: var(--black);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .profile-role {
+            color: var(--red-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 4px;
+            margin-bottom: 15px;
+        }
+
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--gray-light);
+            color: var(--graphite);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .icon-btn:hover {
+            background: var(--red-primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(200, 16, 46, 0.2);
+        }
+
+        /* Botão Principal do WhatsApp */
+        .main-cta {
+            width: 100%;
+            background: var(--green-wpp);
+            color: var(--white);
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+            animation: slideUp 1s ease;
+        }
+
+        .main-cta:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .main-cta i {
+            font-size: 1.4rem;
+        }
+
+        /* Títulos das Seções */
+        .section-title {
+            font-family: var(--font-logo);
+            color: var(--black);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Grid de Diferenciais */
+        .diferenciais-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .dif-card {
+            background: var(--white);
+            padding: 20px 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+
+        .dif-card:hover {
+            border-color: rgba(200, 16, 46, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .dif-card i {
+            color: var(--red-primary);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .dif-card span {
+            color: var(--graphite);
+            font-size: 0.75rem;
+            font-weight: 600;
+            line-height: 1.3;
+            display: block;
+        }
+
+/* Seção Empresas Representadas - Tema Claro (Igual ao Cartão) */
+        .empresas-section {
+            width: 100%;
+            background: var(--white); /* Fundo branco igual ao perfil */
+            border-radius: 16px;
+            padding: 30px 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06); /* Mesma sombra suave do perfil */
+            border: 1px solid rgba(0,0,0,0.01);
+        }
+
+        .empresas-section .section-title {
+            color: var(--black); /* Título escuro */
+        }
+
+        .empresa-card {
+            background: var(--gray-light); /* Fundo cinza bem suave para dar contraste com o branco */
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .empresa-card:hover {
+            border-color: rgba(200, 16, 46, 0.2); /* Borda avermelhada ao passar o mouse */
+            transform: translateY(-2px);
+        }
+
+        .empresa-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .empresa-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .empresa-logo-text {
+            color: var(--black);
+            font-family: var(--font-logo);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .empresa-desc {
+            color: var(--gray-text); /* Texto de descrição no padrão cinza */
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .btn-premium {
+            background: transparent;
+            color: var(--red-primary); /* Botão com texto vermelho */
+            border: 1px solid rgba(200, 16, 46, 0.3); /* Borda vermelha suave */
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-premium:hover {
+            background: var(--red-primary); /* Fundo fica vermelho ao passar o mouse */
+            color: var(--white); /* Texto fica branco */
+            box-shadow: 0 5px 15px rgba(200, 16, 46, 0.2);
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            width: 100%;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .footer-address {
+            color: var(--gray-text);
+            font-size: 0.75rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .footer-address i {
+            color: var(--red-primary);
+            margin-right: 5px;
+        }
+
+        /* Animações */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <!-- Curva Decorativa de Fundo -->
+        <div class="top-curve"></div>
+
+        <div class="content">
+            
+            <!-- Logo e Slogan -->
+            <div class="logo-area">
+                <h1>
+                    <span class="logo-di">DI</span>
+                    <span class="logo-lacerda">LACERDA</span>
+                </h1>
+                <p class="slogan">Solução que gera resultado</p>
+            </div>
+
+            <!-- Perfil / Informações Pessoais -->
+             
+            <div class="profile-card">
+                <div class="profile-name">ROBERTO LACERDA</div>
+                <div class="profile-role">
+                    <h6>comercialdilacerda@gmail.com</h6>
+                </div>
+                
+                <div class="contact-icons">
+                    <a href="https://wa.me/5581996661842" target="_blank" class="icon-btn" aria-label="WhatsApp">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                    <a href="mailto:comercialdilacerda@gmail.com" class="icon-btn" aria-label="E-mail">
+                        <i class="bi bi-envelope"></i>
+                    </a>
+                    <a href="https://wa.me/5581996661842" class="icon-btn" aria-label="Website Geral">
+                        <i class="bi bi-globe"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Botão Chamada para Ação Principal -->
+            <a href="https://wa.me/5581996661842" target="_blank" class="main-cta">
+                <i class="bi bi-whatsapp"></i>
+                ATENDIMENTO
+            </a>
+
+            <!-- Empresas parceiras -->
+            <div class="empresas-section">
+                <h2 class="section-title">Empresas de alto padrão</h2>
+                
+                <!-- Arthco -->
+                <div class="empresa-card">
+                    <div class="empresa-header">
+                        <div>
+                            <div class="empresa-logo-text">ARTHCO</div>
+                            <div class="empresa-desc">Arquivos Deslizantes</div>
+                        </div>
+                    </div>
+                    <a href="https://arthco.com.br" target="_blank" class="btn-premium">
+                        <i class="bi bi-box-arrow-up-right"></i> Acessar Site
+                    </a>
+                </div>
+
+                <!-- DLZ -->
+                <div class="empresa-card">
+                    <div class="empresa-header">
+                        <div>
+                            <div class="empresa-logo-text">De Lazzari</div>
+                            <div class="empresa-desc">Mobiliário Urbano</div>
+                        </div>
+                    </div>
+                    <a href="https://www.delazzari.com.br" target="_blank" class="btn-premium">
+                        <i class="bi bi-box-arrow-up-right"></i> Acessar Site
+                    </a>
+                </div>
+
+                <!-- SULAR -->
+                <div class="empresa-card">
+                    <div class="empresa-header">
+                        <div>
+                            <div class="empresa-logo-text">SULAR</div>
+                            <div class="empresa-desc">Soluções em Mobiliários</div>
+                        </div>
+                    </div>
+                    <a href="https://sular.com.br/" target="_blank" class="btn-premium">
+                        <i class="bi bi-layers"></i> Conhecer Soluções
+                    </a>
+                </div>
+
+                <!-- TNO -->
+                <div class="empresa-card">
+                    <div class="empresa-header">
+                        <div>
+                            <div class="empresa-logo-text">TNO</div>
+                            <div class="empresa-desc">Serviços em Metal</div>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5581996661842" target="_blank" class="btn-premium">
+                        <i class="bi bi-calculator"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+
+            <!-- Rodapé Endereço -->
+            <footer>
+                <div class="footer-address">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    Rua Professor Bandeira, 92<br>
+                    Iputinga – Recife/PE<br>
+                    CEP 50731-250
+                    
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+</body>
+</html>
